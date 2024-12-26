@@ -4,26 +4,66 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Join LatteLink</title>
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js";
+        import { getAuth, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-auth.js";
+
+        // Firebase config
+        const firebaseConfig = {
+            apiKey: "AIzaSyDmV4PGVbb1T3oceHWoQqLRfVOv9qeIC-Q",
+            authDomain: "lattelink-61b5d.firebaseapp.com",
+            projectId: "lattelink-61b5d",
+            storageBucket: "lattelink-61b5d.firebasestorage.app",
+            messagingSenderId: "770658429242",
+            appId: "1:770658429242:web:c4a44a2e7a9b467bd14803",
+            measurementId: "G-SJ7JQFWB02"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+
+        // Google Sign-In
+        const googleSignInButton = document.getElementById("google-sign-in");
+
+        googleSignInButton.addEventListener("click", () => {
+            const provider = new GoogleAuthProvider();
+            signInWithPopup(auth, provider)
+                .then((result) => {
+                    const user = result.user;
+                    console.log("User  signed in:", user);
+                    alert("Welcome " + user.displayName); // Display user info (optional)
+                    // Redirect to page2.html after sign-in
+                    window.location.href = 'page2.html'; // Redirect to page2.html
+                })
+                .catch((error) => {
+                    console.error("Error during Google sign-in:", error);
+                    alert("Error: " + error.message); // Display error message
+                });
+        });
+    </script>
 </head>
 <body style="font-family: Arial, sans-serif; background-color: #f4f8fb; display: flex; align-items: center; justify-content: center; height: 100vh; margin: 0;">
     <div style="background: #ffffff; padding: 40px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); width: 400px;">
         <h2 style="text-align: center; color: #1a3e59; margin-bottom: 20px;">Join LatteLink</h2>
-        <form>
+        <form onsubmit="return false;"> <!-- Prevent default form submission -->
             <input type="email" placeholder="Email" style="width: 100%; padding: 10px; margin-bottom: 15px; border: 1px solid #ccc; border-radius: 5px;">
             <input type="password" placeholder="Password" style="width: 100%; padding: 10px; margin-bottom: 15px; border: 1px solid #ccc; border-radius: 5px;">
             <p style="font-size: 12px; text-align: center; margin-bottom: 15px; color: #6b7c93;">
                 By clicking Continue to join or sign in, you agree to LatteLink's 
-                <a href="#" style="color: #1a3e59; text-decoration: none;">User  Agreement</a>,
+                < <a href="#" style="color: #1a3e59; text-decoration: none;">User  Agreement</a>,
                 <a href="#" style="color: #1a3e59; text-decoration: none;">Privacy Policy</a>, and
                 <a href="#" style="color: #1a3e59; text-decoration: none;">Cookie Policy</a>.
             </p>
-            <button type="submit" style="width: 100%; padding: 10px; background-color: #1a3e59; color: white; border: none; border-radius: 5px; cursor: pointer;">AGREE & JOIN</button>
+            <a href="loginscreen.html" style="text-decoration: none;"> <!-- Link to loginscreen.html -->
+                <button type="button" style="width: 100%; padding: 10px; background-color: #1a3e59; color: white; border: none; border-radius: 5px; cursor: pointer;">AGREE & JOIN</button>
+            </a>
         </form>
         <p style="text-align: center; margin-top: 15px; font-size: 14px; color: #6b7c93;">
-            Already have an account? <a href="#" style="color: #1a3e59; text-decoration: none; font-weight: bold;">Sign In</a>
+            Already have an account? <a href="loginscreen.html" style="color: #1a3e59; text-decoration: none; font-weight: bold;">Sign In</a>
         </p>
         <div style="text-align: center; margin: 15px 0; color: #6b7c93; font-size: 14px;">Or Continue with</div>
-        <button style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; display: flex; align-items: center; justify-content: center; cursor: pointer; background-color: white;">
+        <button id="google-sign-in" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; display: flex; align-items: center; justify-content: center; cursor: pointer; background-color: white;">
             <img src="google trans.jpeg" alt="Google Logo" style="margin-right: 10px; width: 24px; height: 24px;"> Continue With Google
         </button>
     </div>
