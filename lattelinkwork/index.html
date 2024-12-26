@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LatteLink</title>
+    <!-- Firebase SDK -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js";
+        import { getAuth, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-auth.js";
+
+        // Firebase config
+        const firebaseConfig = {
+            apiKey: "AIzaSyDmV4PGVbb1T3oceHWoQqLRfVOv9qeIC-Q",
+            authDomain: "lattelink-61b5d.firebaseapp.com",
+            projectId: "lattelink-61b5d",
+            storageBucket: "lattelink-61b5d.firebasestorage.app",
+            messagingSenderId: "770658429242",
+            appId: "1:770658429242:web:c4a44a2e7a9b467bd14803",
+            measurementId: "G-SJ7JQFWB02"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+
+        // Google Sign-In
+        const googleSignInButton = document.getElementById("google-sign-in");
+
+        googleSignInButton.addEventListener("click", () => {
+            const provider = new GoogleAuthProvider();
+            signInWithPopup(auth, provider)
+                .then((result) => {
+                    const user = result.user;
+                    console.log("User  signed in:", user);
+                    alert("Welcome " + user.displayName); // Display user info (optional)
+                    // You can take further actions after sign-in, like redirecting to a dashboard page
+                    window.location.href = '/dashboard'; // Example redirect to a dashboard page
+                })
+                .catch((error) => {
+                    console.error("Error during Google sign-in:", error);
+                    alert("Error: " + error.message); // Display error message
+                });
+        });
+    </script>
+</head>
+<body style="margin: 0; font-family: Arial, sans-serif; background-color: #07283C; color: white;">
+    <!-- Header -->
+    <header style="display: flex; justify-content: space-between; align-items: center; padding: 20px; background-color: #07283C;">
+        <div style="display: flex; align-items: center;">
+            <span style="font-size: 24px; font-weight: bold; margin-left: 10px;">LATTE<span style="color: #5CC6F2;">LINK</span></span>
+        </div>
+        <nav>
+            <a href="#" style="color: white; text-decoration: none; margin: 0 15px;">Home</a>
+            <a href="#" style="color: white; text-decoration: none; margin: 0 15px;">Features</a>
+            <a href="#" style="color: white; text-decoration: none; margin: 0 15px;">Events</a>
+            <a href="#" style="color: #5CC6F2; text-decoration: none; margin: 0 15px;">Join Now</a>
+            <a href="#" style="color: white; text-decoration: none; margin: 0 15px;">Log In</a>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main style="padding: 50px; text-align: center;">
+        <h1 style="font-size: 36px; margin-bottom: 20px;">CONNECT, COLLABORATE AND <br> GROW AT YOUR OWN PACE</h1>
+        <p style="font-size: 18px; margin-bottom: 20px;">Take the pressure off and focus on building meaningful connections</p>
+
+        <!-- Buttons Container -->
+        <div style="margin: 30px 0;">
+            <!-- Google Sign-In Button -->
+            <button id="google-sign-in" style="display: flex; align-items: center; justify-content: center; padding: 10px 20px; width: 250px; margin: 10px auto; background-color: #5CC6F2; color: white; border: none; border-radius: 20px; cursor: pointer;">
+                <img src="google trans.jpeg" alt="Google Icon" style="height: 20px; margin-right: 10px;"> Continue with Google
+            </button>
+            <button style="display: flex; align-items: center; justify-content: center; padding: 10px 20px; width: 250px; margin: 10px auto; background-color: #5CC6F2; color: white; border: none; border-radius: 20px; cursor: pointer;">
+                <img src="emailpeg.jpeg" alt="Email Icon" style="height: 20px; margin-right: 10px;"> Sign in with Email
+            </button>
+        </div>
+
+        <p style="font-size: 14px; color: #BBBBBB;">By clicking Continue to join or sign in, you agree to LatteLink's
+            <a href="#" style="color: #5CC6F2;">User  Agreement</a>, <a href="#" style="color: #5CC6F2;">Privacy Policy</a>, and
+            <a href="#" style="color: #5CC6F2;">Cookie Policy</a>.
+        </p>
+        <p style="margin-top: 20px; font-size: 16px; color: #5CC6F2;">
+            New to LatteLink? 
+            <a href="loginscreen.html" style="color: #5CC6F2; text-decoration: underline;">Create Account</a>
+        </p>
+    </main>
+
+    <!-- Images -->
+    <section style="display: flex; justify-content: center; flex-wrap: wrap; gap: 20px; padding: 20px;">
+        <img src="image1.jpeg" alt="Image 1" style="width: 150px; height: 150px; border-radius: 50%; border: 3px solid #5CC6F2;">
+        <img src="image2.jpeg" alt="Image 2" style="width: 150px; height: 150px; border-radius: 50%; border: 3px solid #5CC6F2;">
+        <img src="image3.jpeg" alt="Image 3" style="width: 150px; height: 150px; border-radius: 50%; border: 3px solid #5CC6F2;">
+        <img src="image4.jpeg" alt="Image 4" style="width: 150px; height: 150px; border-radius: 50%; border: 3px solid #5CC6F2;">
+    </section>
+
+</body>
+</html>
